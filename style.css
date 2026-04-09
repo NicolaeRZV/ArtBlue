@@ -837,6 +837,107 @@ section {
   font-weight: 600;
 }
 
+.img-credit {
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: rgba(156, 163, 175, 0.95);
+}
+
+.img-credit a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.stage-illustration {
+  width: 100%;
+  max-width: 330px;
+  height: 260px;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.98));
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.stage-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stage-illustration .sb2-mercury,
+.stage-illustration .sb2-heatwave,
+.stage-illustration .sb3-water,
+.stage-illustration .sb3-sand,
+.stage-illustration .sb4-heatwave,
+.stage-illustration .sb4-line,
+.stage-illustration .sb4-pulse,
+.stage-illustration .sb4-node,
+.stage-illustration .sb4-sand {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.stage-illustration--heat .sb2-mercury {
+  animation: sbThermometerRise 3.2s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.stage-illustration--heat .sb2-heatwave {
+  animation: sbHeatWave 3.2s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.stage-illustration--heat .sb2-sand {
+  animation: sbSandWarm 3.2s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.stage[data-stage="2"].stage--active .stage-illustration--heat .sb2-mercury,
+.stage[data-stage="2"].stage--active .stage-illustration--heat .sb2-heatwave,
+.stage[data-stage="2"].stage--active .stage-illustration--heat .sb2-sand {
+  animation-play-state: running;
+}
+
+.stage-illustration--pipe .sb3-water {
+  animation: sbWaterFlow 2.2s linear infinite;
+  animation-play-state: paused;
+}
+
+.stage-illustration--pipe .sb3-sand {
+  animation: sbSandCool 2.8s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.stage[data-stage="3"].stage--active .stage-illustration--pipe .sb3-water,
+.stage[data-stage="3"].stage--active .stage-illustration--pipe .sb3-sand {
+  animation-play-state: running;
+}
+
+.stage-illustration--grid .sb4-line {
+  stroke-dasharray: 10 12;
+  animation: sbGridDash 2.2s linear infinite;
+  animation-play-state: paused;
+}
+
+.stage-illustration--grid .sb4-pulse {
+  animation: sbPulseMove 2.2s linear infinite;
+  animation-play-state: paused;
+}
+
+.stage-illustration--grid .sb4-node {
+  animation: sbNodePulse 1.6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.stage[data-stage="4"].stage--active .stage-illustration--grid .sb4-line,
+.stage[data-stage="4"].stage--active .stage-illustration--grid .sb4-pulse,
+.stage[data-stage="4"].stage--active .stage-illustration--grid .sb4-node {
+  animation-play-state: running;
+}
+
 .gallery-controls {
   display: flex;
   align-items: stretch;
@@ -1951,6 +2052,108 @@ section {
   }
   50% {
     box-shadow: 0 0 55px rgba(250, 204, 21, 0.9);
+  }
+}
+
+@keyframes sbThermometerRise {
+  0% {
+    height: 0px;
+    y: 146px;
+  }
+  55% {
+    height: 80px;
+    y: 66px;
+  }
+  100% {
+    height: 0px;
+    y: 146px;
+  }
+}
+
+@keyframes sbHeatWave {
+  0% {
+    opacity: 0.12;
+    transform: translateY(6px) scaleX(0.96);
+  }
+  55% {
+    opacity: 0.35;
+    transform: translateY(0) scaleX(1);
+  }
+  100% {
+    opacity: 0.12;
+    transform: translateY(-6px) scaleX(1.04);
+  }
+}
+
+@keyframes sbSandWarm {
+  0%,
+  100% {
+    opacity: 0.45;
+    filter: saturate(0.95) brightness(0.95);
+  }
+  55% {
+    opacity: 0.65;
+    filter: saturate(1.15) brightness(1.05);
+  }
+}
+
+@keyframes sbWaterFlow {
+  0% {
+    transform: translateX(-36px);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(36px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes sbSandCool {
+  0%,
+  100% {
+    filter: saturate(1.1) brightness(1.02);
+    opacity: 0.7;
+  }
+  55% {
+    filter: saturate(0.85) brightness(0.92);
+    opacity: 0.55;
+  }
+}
+
+@keyframes sbGridDash {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0.85;
+  }
+  100% {
+    stroke-dashoffset: -44;
+    opacity: 0.85;
+  }
+}
+
+@keyframes sbPulseMove {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(106px, -26px) scale(0.95);
+    opacity: 0.0;
+  }
+}
+
+@keyframes sbNodePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
   }
 }
 
